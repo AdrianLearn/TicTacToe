@@ -1,5 +1,10 @@
 # TicTacToe
 Adrian Leung
 September 15, 2019
-Tic-Tac-Toe in Javascript, using no HTML or CSS using p5.js
+## Introduction
 
+A two player online version of tic tac toe using p5.js. 
+
+## Requirements
+
+No outside libraries required.
