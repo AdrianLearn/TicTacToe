@@ -9,7 +9,9 @@ let board = [
 ['','',''],
 ['','',''],
 ];
-
+const FBT = 500/3; // stands for firstBoardThird
+const SBT = 1000/3; // stands for secondBoardThird
+const dim = 500; // stands for dimension
 let players = ['O','X']; //Array to represent players O and X
 let currentPlayer; // Variable to keep track of whose turn it is
 let open = []; // Variable to determine if a spot is used or not
@@ -81,24 +83,25 @@ function checkWinner() {
 /**
 *This terrible display of logic to determine what position the mouse is currently in
 **/
+
 function checkQuadrant(){
-  if(mouseX > 0 && mouseX < boardSplit && mouseY > 0 && mouseY < boardSplit){
+  if(mouseX > 0 && mouseX < FBT && mouseY > 0 && mouseY < FBT){
     return "quad1";
-  }  if(mouseX > boardSplit && mouseX < boardSplit*2 && mouseY > 0 && mouseY < boardSplit){
+  }  if(mouseX > FBT && mouseX < SBT && mouseY > 0 && mouseY < FBT){
     return "quad2";
-  }  if(mouseX > boardSplit*2 && mouseX < 500 && mouseY > 0 && mouseY < boardSplit){
+  }  if(mouseX > SBT && mouseX < dim && mouseY > 0 && mouseY < FBT){
     return "quad3";
-  }  if(mouseX > 0 && mouseX < boardSplit && mouseY > boardSplit && mouseY < boardSplit*2){
+  }  if(mouseX > 0 && mouseX < FBT && mouseY > FBT && mouseY < SBT){
     return "quad4";
-  }  if(mouseX > boardSplit && mouseX < boardSplit*2 && mouseY > boardSplit && mouseY < boardSplit*2){
+  }  if(mouseX > FBT && mouseX < SBT && mouseY > FBT && mouseY < SBT){
     return "quad5";
-  } if(mouseX > boardSplit*2 && mouseX < 500 && mouseY > boardSplit && mouseY < boardSplit*2){
+  } if(mouseX > SBT && mouseX < dim && mouseY > FBT && mouseY < SBT){
     return "quad6";
-  } if(mouseX > 0 && mouseX < boardSplit && mouseY > boardSplit*2 && mouseY < 500){
+  } if(mouseX > 0 && mouseX < FBT && mouseY > SBT && mouseY < dim){
     return "quad7";
-  } if(mouseX > boardSplit && mouseX < boardSplit*2 && mouseY > boardSplit*2 && mouseY < 500){
+  } if(mouseX > FBT && mouseX < SBT && mouseY > SBT && mouseY < dim){
     return "quad8";
-  } if(mouseX > boardSplit*2 && mouseX < 500 && mouseY > boardSplit*2 && mouseY < 500){
+  } if(mouseX > SBT && mouseX < dim && mouseY > SBT && mouseY < dim){
     return "quad9";
   }
 }
