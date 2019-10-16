@@ -79,8 +79,34 @@ function checkWinner() {
   }
 }
 /**
+*This terrible display of logic to determine what position the mouse is currently in
+**/
+function checkQuadrant(){
+  if(mouseX > 0 && mouseX < boardSplit && mouseY > 0 && mouseY < boardSplit){
+    return "quad1";
+  }  if(mouseX > boardSplit && mouseX < boardSplit*2 && mouseY > 0 && mouseY < boardSplit){
+    return "quad2";
+  }  if(mouseX > boardSplit*2 && mouseX < 500 && mouseY > 0 && mouseY < boardSplit){
+    return "quad3";
+  }  if(mouseX > 0 && mouseX < boardSplit && mouseY > boardSplit && mouseY < boardSplit*2){
+    return "quad4";
+  }  if(mouseX > boardSplit && mouseX < boardSplit*2 && mouseY > boardSplit && mouseY < boardSplit*2){
+    return "quad5";
+  } if(mouseX > boardSplit*2 && mouseX < 500 && mouseY > boardSplit && mouseY < boardSplit*2){
+    return "quad6";
+  } if(mouseX > 0 && mouseX < boardSplit && mouseY > boardSplit*2 && mouseY < 500){
+    return "quad7";
+  } if(mouseX > boardSplit && mouseX < boardSplit*2 && mouseY > boardSplit*2 && mouseY < 500){
+    return "quad8";
+  } if(mouseX > boardSplit*2 && mouseX < 500 && mouseY > boardSplit*2 && mouseY < 500){
+    return "quad9";
+  }
+}
+
+/**
 * Method to draw the board, X's and O's, called 60 times a second by p5.js.
 */
+
 function draw() {
   textSize(32);
   background(220);
@@ -106,7 +132,7 @@ function draw() {
       }
     }
   }
-  
+
   let result = checkWinner();
   if (result != null) {
     noLoop();
