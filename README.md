@@ -9,7 +9,8 @@ A two player online version of tic tac toe using p5.js.
 
 No outside libraries required.
 
-# To Do
+### To Do
  
  Add a single player mode,
  Make it look better
+ Bug fixes
