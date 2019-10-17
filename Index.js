@@ -15,6 +15,7 @@ const dim = 500; // stands for dimension
 let players = ['O','X']; //Array to represent players O and X
 let currentPlayer; // Variable to keep track of whose turn it is
 let open = []; // Variable to determine if a spot is used or not
+
 /**
 * Method to setup the board, called when started by p5.js
 */
@@ -27,6 +28,7 @@ function setup(){
     }
   }
 }
+
 /**
 * Method to iterate to the next turn
 */
@@ -38,20 +40,27 @@ function nextTurn() {
   board[i][c]=players[currentPlayer];
   currentPlayer = (currentPlayer + 1) % players.length;
 }
+
 /**
 * Method to determine if a, b and c are equal and not blank.
-* @param abc to be compared
+* @param a value to be compared
+* @param b value to be compared
+* @param c value to be compared
 * @return boolean which is true if the three are equal, false if they are not.
 */
 function threequals(a,b,c){
   return(a == b && b == c && a != '');
 }
+
 /**
 * Method to move to the next turn when the mouse is clicked.
 */
 function mousePressed() {
-  nextTurn();
+  if(mouseX > 0 && mouseX < dim && mouseY > 0 && mouseY < dim){
+    nextTurn();
+  }
 }
+
 /**
 * Method to check if someone has won the game, using the threequals method.
 * @return true if there is a winner and end the game, false and the game continues
@@ -63,6 +72,7 @@ function checkWinner() {
       winner = board[i][0];
     }
   }
+
     for (let i = 0; i < 3; i++) {
     if(threequals(board[0][i],board[1][i],board[2][i])){
       winner = board[0][i];
@@ -81,7 +91,7 @@ function checkWinner() {
   }
 }
 /**
-*This terrible display of logic to determine what position the mouse is currently in
+*This terrible display of logic to determine what position the mouse is currently in to place a character at the location
 **/
 
 function checkQuadrant(){
@@ -109,7 +119,6 @@ function checkQuadrant(){
 /**
 * Method to draw the board, X's and O's, called 60 times a second by p5.js.
 */
-
 function draw() {
   textSize(32);
   background(220);
@@ -138,8 +147,10 @@ function draw() {
 
   let result = checkWinner();
   if (result != null) {
+    if(result = 'tie'){
+      console.log("tie");
+    }
     noLoop();
-    console.log(result);
     createP(result).style('color', '#000').style('font-size','32pt');
     console.log(result);
   }else {
