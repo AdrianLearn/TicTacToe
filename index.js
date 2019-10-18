@@ -1,4 +1,4 @@
-/** index.js
+/**index.js
 * Independant project to mimic a game of Tic-Tac-Toe
 * Authors: Adrian Leung
 * Date: September 15, 2019
