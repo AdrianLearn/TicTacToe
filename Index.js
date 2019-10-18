@@ -1,4 +1,4 @@
-/** Index.js
+/** index.js
 * Independant project to mimic a game of Tic-Tac-Toe
 * Authors: Adrian Leung
 * Date: September 15, 2019
@@ -150,9 +150,11 @@ function draw() {
     if(result = 'tie'){
       console.log("tie");
     }
-    noLoop();
     createP(result).style('color', '#000').style('font-size','32pt');
     console.log(result);
+    if(mosueIsDown()){
+      setup();
+    }
   }else {
     nextTurn();
   }
