@@ -33,12 +33,50 @@ function setup(){
 * Method to iterate to the next turn
 */
 function nextTurn() {
-  let index = floor(random(open.length));
-  let spot = open.splice(index,1)[0];
-  let i = spot[0];
-  let c = spot[1];
-  board[i][c]=players[currentPlayer];
+  switch(checkQuadrant()) {
+  case "quad1":
+    console.log("marker at quad1");
+    board[0][0]=players[currentPlayer];
+    break;
+  case "quad2":
+    console.log("marker at quad2");
+    board[1][0]=players[currentPlayer];
+    break;
+  case "quad3":
+    console.log("marker at quad3");
+    board[2][0]=players[currentPlayer];
+    break;
+  case "quad4":
+    console.log("marker at quad4");
+    board[0][1]=players[currentPlayer];
+    break;
+  case "quad5":
+    console.log("marker at quad5");
+    board[1][1]=players[currentPlayer];
+    break;
+  case "quad6":
+    console.log("marker at quad6");
+    board[2][1]=players[currentPlayer];
+    break;
+  case "quad7":
+    console.log("marker at quad7");
+    board[0][2]=players[currentPlayer];
+    break;
+  case "quad8":
+    console.log("marker at quad8");
+    board[1][2]=players[currentPlayer];
+    break;
+  case "quad9":
+    console.log("marker at quad9");
+    board[2][2]=players[currentPlayer];
+    break;
+  default:
+    console.log("outside canvas");
+  }
+
+  //board[i][c]=players[currentPlayer];
   currentPlayer = (currentPlayer + 1) % players.length;
+  result.textContent = players[currentPlayer];
 }
 
 /**
@@ -150,9 +188,8 @@ function draw() {
     if(result = 'tie'){
       console.log("tie");
     }
-    createP(result).style('color', '#000').style('font-size','32pt');
     console.log(result);
-    if(mosueIsDown()){
+    if(mouseIsPressed()){
       setup();
     }
   }else {
