@@ -3,7 +3,7 @@ Adrian Leung
 September 15, 2019
 ## Introduction
 
-A two player online version of tic tac toe using p5.js. 
+Private project to mimic the game of Tic-Tac-Toe online. Created using Javascript and P5.js.
 
 ## Requirements
 
