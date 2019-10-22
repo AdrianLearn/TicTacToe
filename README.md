@@ -11,6 +11,6 @@ No outside libraries required.
 
 ### To Do
  
- Add a single player mode,
- Make it look better
- Bug fixes
+- Add a single player mode
+- Make it look better
+- Bug fixes
