@@ -13,6 +13,7 @@ const FBT = 500/3; // stands for firstBoardThird
 const SBT = 1000/3; // stands for secondBoardThird
 const dim = 500; // stands for dimension
 let players = ['O','X']; //Array to represent players O and X
+const result = document.getElementById("currentPlayer"); // to display to the user whose turn it is
 let currentPlayer; // Variable to keep track of whose turn it is
 let open = []; // Variable to determine if a spot is used or not
 
@@ -185,7 +186,7 @@ function draw() {
 
   let result = checkWinner();
   if (result != null) {
-    if(result = 'tie'){
+    if(result == 'tie'){
       console.log("tie");
     }
     console.log(result);
