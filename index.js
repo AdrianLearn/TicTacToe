@@ -4,24 +4,31 @@
 * Date: September 15, 2019
 */
 // Array to represent the blank board
-let board = [
-['','',''],
-['','',''],
-['','',''],
-];
+let board;
 const FBT = 500/3; // stands for firstBoardThird
 const SBT = 1000/3; // stands for secondBoardThird
 const dim = 500; // stands for dimension
 let players = ['O','X']; //Array to represent players O and X
 const result = document.getElementById("currentPlayer"); // to display to the user whose turn it is
+const previousWinner = document.getElementById("previousWinner"); // to display to the user who the previous winner was
 let currentPlayer; // Variable to keep track of whose turn it is
-let open = []; // Variable to determine if a spot is used or not
+let open; // Variable to determine if a spot is used or not
+let moveCounter = 0; // Variable to count the number of moves in a game
 
 /**
 * Method to setup the board, called when started by p5.js
 */
 function setup(){
+  open = [];
+  board = [
+  ['','',''],
+  ['','',''],
+  ['','',''],
+  ];
+  moveCounter = 0;
+  console.log(open);
   createCanvas(500,500);
+  console.log("setup");
   currentPlayer = floor(random(players.length));
   for (let i = 0; i < 3; i++) {
     for(let c = 0; c < 3; c++) {
@@ -36,47 +43,80 @@ function setup(){
 function nextTurn() {
   switch(checkQuadrant()) {
   case "quad1":
-    console.log("marker at quad1");
-    board[0][0]=players[currentPlayer];
+    if(board[0][0] == ''){
+      board[0][0] = players[currentPlayer];
+      currentPlayer = (currentPlayer + 1) % players.length;
+      moveCounter++;
+    }
     break;
   case "quad2":
-    console.log("marker at quad2");
-    board[1][0]=players[currentPlayer];
+    if(board[1][0] == ''){
+      board[1][0] = players[currentPlayer];
+      currentPlayer = (currentPlayer + 1) % players.length;
+      moveCounter++;
+    }
+    open.splice(1,1);
     break;
   case "quad3":
-    console.log("marker at quad3");
-    board[2][0]=players[currentPlayer];
+  if(board[2][0] == ''){
+    board[2][0] = players[currentPlayer];
+    currentPlayer = (currentPlayer + 1) % players.length;
+    moveCounter++;
+  }
+    open.splice(2,1);
     break;
   case "quad4":
-    console.log("marker at quad4");
-    board[0][1]=players[currentPlayer];
+  if(board[0][1] == ''){
+    board[0][1] = players[currentPlayer];
+    currentPlayer = (currentPlayer + 1) % players.length;
+    moveCounter++;
+  }
+    open.splice(3,1);
     break;
   case "quad5":
-    console.log("marker at quad5");
-    board[1][1]=players[currentPlayer];
+  if(board[1][1] == ''){
+    board[1][1] = players[currentPlayer];
+    currentPlayer = (currentPlayer + 1) % players.length;
+    moveCounter++;
+  }
+    open.splice(4,1);
     break;
   case "quad6":
-    console.log("marker at quad6");
-    board[2][1]=players[currentPlayer];
+  if(board[2][1] == ''){
+    board[2][1] = players[currentPlayer];
+    currentPlayer = (currentPlayer + 1) % players.length;
+    moveCounter++;
+  }
+    open.splice(5,1);
     break;
   case "quad7":
-    console.log("marker at quad7");
-    board[0][2]=players[currentPlayer];
+  if(board[0][2] == ''){
+    board[0][2] = players[currentPlayer];
+    currentPlayer = (currentPlayer + 1) % players.length;
+    moveCounter++;
+  }
+    open.splice(6,1);
     break;
   case "quad8":
-    console.log("marker at quad8");
-    board[1][2]=players[currentPlayer];
+  if(board[1][2] == ''){
+    board[1][2] = players[currentPlayer];
+    currentPlayer = (currentPlayer + 1) % players.length;
+    moveCounter++;
+  }
+    open.splice(7,1);
     break;
   case "quad9":
-    console.log("marker at quad9");
-    board[2][2]=players[currentPlayer];
+  if(board[2][2] == ''){
+    board[2][2] = players[currentPlayer];
+    currentPlayer = (currentPlayer + 1) % players.length;
+    moveCounter++;
+  }
+    open.splice(8,1);
     break;
   default:
     console.log("outside canvas");
-  }
-
-  //board[i][c]=players[currentPlayer];
-  currentPlayer = (currentPlayer + 1) % players.length;
+}
+  //currentPlayer = (currentPlayer + 1) % players.length;
   result.textContent = players[currentPlayer];
 }
 
@@ -111,8 +151,7 @@ function checkWinner() {
       winner = board[i][0];
     }
   }
-
-    for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i++) {
     if(threequals(board[0][i],board[1][i],board[2][i])){
       winner = board[0][i];
     }
@@ -123,16 +162,16 @@ function checkWinner() {
   if(threequals(board[2][0],board[1][1],board[0][2])){
     winner = board[2][0];
   }
-  if(winner == null && open.length == 0) {
+  if(winner == null && moveCounter == 9) {
     return 'tie';
   }else {
     return winner;
   }
 }
+
 /**
 *This terrible display of logic to determine what position the mouse is currently in to place a character at the location
 **/
-
 function checkQuadrant(){
   if(mouseX > 0 && mouseX < FBT && mouseY > 0 && mouseY < FBT){
     return "quad1";
@@ -184,17 +223,10 @@ function draw() {
     }
   }
 
-  let result = checkWinner();
-  if (result != null) {
-    if(result == 'tie'){
-      console.log("tie");
+  let winner = checkWinner();
+  if (winner != null) {
+    previousWinner.textContent = winner;
+    winner = null;
+    setup();
     }
-    console.log(result);
-    if(mouseIsPressed()){
-      setup();
-    }
-  }else {
-    nextTurn();
   }
-
-}
