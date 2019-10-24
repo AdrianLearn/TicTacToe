@@ -1,6 +1,8 @@
 # TicTacToe
 Adrian Leung
+
 September 15, 2019
+
 Click [here](https://adrianlearn.github.io/TicTacToe/) to play
 ## Introduction
 
