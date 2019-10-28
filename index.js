@@ -1,40 +1,37 @@
 /**index.js
 * Independant project to mimic a game of Tic-Tac-Toe
-* Authors: Adrian Leung
+* Author: Adrian Leung
 * Date: September 15, 2019
 */
 // Array to represent the blank board
 let board;
-const FBT = 500/3; // stands for firstBoardThird
-const SBT = 1000/3; // stands for secondBoardThird
-const dim = 500; // stands for dimension
+const FBT = 500/3; // Stands for firstBoardThird, represents the first third of the board
+const SBT = 1000/3; // Stands for secondBoardThird, represents the second third of the board
+const dim = 500; // Stands for dimension, represents the dimensions of the board
 let players = ['O','X']; //Array to represent players O and X
-const result = document.getElementById("currentPlayer"); // to display to the user whose turn it is
-const previousWinner = document.getElementById("previousWinner"); // to display to the user who the previous winner was
+const result = document.getElementById("currentPlayer"); // To display to the user whose turn it is
+const previousWinner = document.getElementById("previousWinner"); // To display to the user who the previous winner was
+const xTotal = document.getElementById("xTotal"); // To display the number of wins player X has
+const oTotal = document.getElementById("oTotal"); // To display the number of wins player Y has
+let xScore = 0; // Variable to keep track of how many wins player X has
+let oScore = 0; // Variable to keep track of how many wins player Y has
 let currentPlayer; // Variable to keep track of whose turn it is
-let open; // Variable to determine if a spot is used or not
 let moveCounter = 0; // Variable to count the number of moves in a game
+
 
 /**
 * Method to setup the board, called when started by p5.js
 */
 function setup(){
-  open = [];
   board = [
   ['','',''],
   ['','',''],
   ['','',''],
   ];
   moveCounter = 0;
-  console.log(open);
   createCanvas(500,500);
   console.log("setup");
   currentPlayer = floor(random(players.length));
-  for (let i = 0; i < 3; i++) {
-    for(let c = 0; c < 3; c++) {
-      open.push([i,c]);
-    }
-  }
 }
 
 /**
@@ -55,7 +52,6 @@ function nextTurn() {
       currentPlayer = (currentPlayer + 1) % players.length;
       moveCounter++;
     }
-    open.splice(1,1);
     break;
   case "quad3":
   if(board[2][0] == ''){
@@ -63,7 +59,6 @@ function nextTurn() {
     currentPlayer = (currentPlayer + 1) % players.length;
     moveCounter++;
   }
-    open.splice(2,1);
     break;
   case "quad4":
   if(board[0][1] == ''){
@@ -71,7 +66,6 @@ function nextTurn() {
     currentPlayer = (currentPlayer + 1) % players.length;
     moveCounter++;
   }
-    open.splice(3,1);
     break;
   case "quad5":
   if(board[1][1] == ''){
@@ -79,7 +73,6 @@ function nextTurn() {
     currentPlayer = (currentPlayer + 1) % players.length;
     moveCounter++;
   }
-    open.splice(4,1);
     break;
   case "quad6":
   if(board[2][1] == ''){
@@ -87,7 +80,6 @@ function nextTurn() {
     currentPlayer = (currentPlayer + 1) % players.length;
     moveCounter++;
   }
-    open.splice(5,1);
     break;
   case "quad7":
   if(board[0][2] == ''){
@@ -95,7 +87,6 @@ function nextTurn() {
     currentPlayer = (currentPlayer + 1) % players.length;
     moveCounter++;
   }
-    open.splice(6,1);
     break;
   case "quad8":
   if(board[1][2] == ''){
@@ -103,7 +94,6 @@ function nextTurn() {
     currentPlayer = (currentPlayer + 1) % players.length;
     moveCounter++;
   }
-    open.splice(7,1);
     break;
   case "quad9":
   if(board[2][2] == ''){
@@ -111,12 +101,10 @@ function nextTurn() {
     currentPlayer = (currentPlayer + 1) % players.length;
     moveCounter++;
   }
-    open.splice(8,1);
     break;
   default:
     console.log("outside canvas");
-}
-  //currentPlayer = (currentPlayer + 1) % players.length;
+  }
   result.textContent = players[currentPlayer];
 }
 
@@ -175,21 +163,29 @@ function checkWinner() {
 function checkQuadrant(){
   if(mouseX > 0 && mouseX < FBT && mouseY > 0 && mouseY < FBT){
     return "quad1";
-  }  if(mouseX > FBT && mouseX < SBT && mouseY > 0 && mouseY < FBT){
+  }
+  if(mouseX > FBT && mouseX < SBT && mouseY > 0 && mouseY < FBT){
     return "quad2";
-  }  if(mouseX > SBT && mouseX < dim && mouseY > 0 && mouseY < FBT){
+  }
+  if(mouseX > SBT && mouseX < dim && mouseY > 0 && mouseY < FBT){
     return "quad3";
-  }  if(mouseX > 0 && mouseX < FBT && mouseY > FBT && mouseY < SBT){
+  }
+  if(mouseX > 0 && mouseX < FBT && mouseY > FBT && mouseY < SBT){
     return "quad4";
-  }  if(mouseX > FBT && mouseX < SBT && mouseY > FBT && mouseY < SBT){
+  }
+  if(mouseX > FBT && mouseX < SBT && mouseY > FBT && mouseY < SBT){
     return "quad5";
-  } if(mouseX > SBT && mouseX < dim && mouseY > FBT && mouseY < SBT){
+  }
+  if(mouseX > SBT && mouseX < dim && mouseY > FBT && mouseY < SBT){
     return "quad6";
-  } if(mouseX > 0 && mouseX < FBT && mouseY > SBT && mouseY < dim){
+  }
+  if(mouseX > 0 && mouseX < FBT && mouseY > SBT && mouseY < dim){
     return "quad7";
-  } if(mouseX > FBT && mouseX < SBT && mouseY > SBT && mouseY < dim){
+  }
+  if(mouseX > FBT && mouseX < SBT && mouseY > SBT && mouseY < dim){
     return "quad8";
-  } if(mouseX > SBT && mouseX < dim && mouseY > SBT && mouseY < dim){
+  }
+  if(mouseX > SBT && mouseX < dim && mouseY > SBT && mouseY < dim){
     return "quad9";
   }
 }
@@ -225,6 +221,14 @@ function draw() {
 
   let winner = checkWinner();
   if (winner != null) {
+    if(winner == 'X'){
+      xScore++;
+    }
+    if(winner == 'O'){
+      oScore++;
+    }
+    xTotal.textContent = xScore;
+    oTotal.textContent = oScore;
     previousWinner.textContent = winner;
     winner = null;
     setup();
