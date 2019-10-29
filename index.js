@@ -3,8 +3,7 @@
 * Author: Adrian Leung
 * Date: September 15, 2019
 */
-// Array to represent the blank board
-let board;
+let board; // Array to represent the blank board
 const FBT = 500/3; // Stands for firstBoardThird, represents the first third of the board
 const SBT = 1000/3; // Stands for secondBoardThird, represents the second third of the board
 const dim = 500; // Stands for dimension, represents the dimensions of the board
@@ -20,7 +19,7 @@ let moveCounter = 0; // Variable to count the number of moves in a game
 
 
 /**
-* Method to setup the board, called when started by p5.js
+* Function to setup the board, called when started by p5.js
 */
 function setup(){
   board = [
@@ -35,7 +34,7 @@ function setup(){
 }
 
 /**
-* Method to iterate to the next turn
+* Function to iterate to the next turn
 */
 function nextTurn() {
   switch(checkQuadrant()) {
@@ -109,7 +108,7 @@ function nextTurn() {
 }
 
 /**
-* Method to determine if a, b and c are equal and not blank.
+* Function to determine if a, b and c are equal and not blank.
 * @param a value to be compared
 * @param b value to be compared
 * @param c value to be compared
@@ -120,7 +119,7 @@ function threequals(a,b,c){
 }
 
 /**
-* Method to move to the next turn when the mouse is clicked.
+* Function to move to the next turn when the mouse is clicked.
 */
 function mousePressed() {
   if(mouseX > 0 && mouseX < dim && mouseY > 0 && mouseY < dim){
@@ -129,7 +128,7 @@ function mousePressed() {
 }
 
 /**
-* Method to check if someone has won the game, using the threequals method.
+* Function to check if someone has won the game, using the threequals Function.
 * @return true if there is a winner and end the game, false and the game continues
 */
 function checkWinner() {
@@ -191,7 +190,7 @@ function checkQuadrant(){
 }
 
 /**
-* Method to draw the board, X's and O's, called 60 times a second by p5.js.
+* Function to draw the board, X's and O's, called 60 times a second by p5.js.
 */
 function draw() {
   textSize(32);
