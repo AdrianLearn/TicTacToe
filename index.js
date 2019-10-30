@@ -3,20 +3,19 @@
 * Author: Adrian Leung
 * Date: September 15, 2019
 */
-let board; // Array to represent the blank board
 const FBT = 500/3; // Stands for firstBoardThird, represents the first third of the board
 const SBT = 1000/3; // Stands for secondBoardThird, represents the second third of the board
 const dim = 500; // Stands for dimension, represents the dimensions of the board
 let players = ['O','X']; //Array to represent players O and X
-const result = document.getElementById("currentPlayer"); // To display to the user whose turn it is
-const previousWinner = document.getElementById("previousWinner"); // To display to the user who the previous winner was
+const result = document.getElementById("currentPlayer");
+const previousWinner = document.getElementById("previousWinner");
 const xTotal = document.getElementById("xTotal"); // To display the number of wins player X has
-const oTotal = document.getElementById("oTotal"); // To display the number of wins player Y has
+const oTotal = document.getElementById("oTotal");
 let xScore = 0; // Variable to keep track of how many wins player X has
-let oScore = 0; // Variable to keep track of how many wins player Y has
-let currentPlayer; // Variable to keep track of whose turn it is
-let moveCounter = 0; // Variable to count the number of moves in a game
-
+let oScore = 0;
+let board; 
+let currentPlayer;
+let moveCounter = 0;
 
 /**
 * Function to setup the board, called when started by p5.js
@@ -107,20 +106,10 @@ function nextTurn() {
   result.textContent = players[currentPlayer];
 }
 
-/**
-* Function to determine if a, b and c are equal and not blank.
-* @param a value to be compared
-* @param b value to be compared
-* @param c value to be compared
-* @return boolean which is true if the three are equal, false if they are not.
-*/
 function threequals(a,b,c){
   return(a == b && b == c && a != '');
 }
 
-/**
-* Function to move to the next turn when the mouse is clicked.
-*/
 function mousePressed() {
   if(mouseX > 0 && mouseX < dim && mouseY > 0 && mouseY < dim){
     nextTurn();
